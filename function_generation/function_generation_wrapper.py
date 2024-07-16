@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+"""
+Author: Lina Marie Dürrwald
+Date: 15.04.2024
+Description: Script to create multiple sets of sparse additive test functions.
+
+Usage:
+    python3 function_generation_wrapper.py 
+
+Run after specifying the desired parameters in 'if __name__ == "__main__"'-block. 
+"""
+
 import os
 import sys
 import numpy as np
@@ -14,7 +26,7 @@ def gen_func(d, N, repeat, max_size, min_size, frac, seed, smooth):
     name = f"d={d}_N={N}_smooth={smooth}"
 
     # Check if the output directory exists, if not, create it in the current dir
-    directory = os.path.join(current_dir, "SparseFunctions2", name)
+    directory = os.path.join(current_dir, "SparseFunctions", name)
     if not os.path.exists(directory):
         os.makedirs(directory)
 
@@ -22,11 +34,11 @@ def gen_func(d, N, repeat, max_size, min_size, frac, seed, smooth):
     sp_f.SparseFunction.generate_and_save_functions(ds, Ns, max_size, min_size, frac, directory, name, seed, smooth)
 
 if __name__ == "__main__":
-    # create Ns and dimensions for function generation
-    dimensions = np.array([20, 50, 100,250,500,750,1000,2000]) #20,50,
-    fracs = np.array([0.2, 0.5, 3/4, 4/5, 6/7, 7/8, 8/9, 9/10]) #0.2, 0.5,
-    repeat = 10
-    max_size = 5 # make 8 starting at 500?
+    # create parameter arrays for function generation
+    dimensions = np.array([20, 100, 500]) 
+    fracs = np.array([0.2, 3/4, 6/7]) 
+    repeat = 5
+    max_size = 5 
     min_size = 3
     seed = 0
 
