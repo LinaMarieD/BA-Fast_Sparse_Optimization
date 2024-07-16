@@ -1,6 +1,6 @@
 # Code Written for the Bachelor Thesis "Fast Sparse Optimization Using Consensus-Based ADMM"
 
-This code was written for the numerical experiments of a bachelor thesis in mathematics that considered the optimization of sparse additive functions using a consensus-based alternating direction of multipliers (CB-ADMM, see e.g. [^1]) algorithm. 
+This code was written for the numerical experiments of a bachelor thesis in mathematics that considered the optimization of sparse additive functions using a consensus-based alternating direction of multipliers [^1] (CB-ADMM) algorithm. 
 
 ## Requirements
 The code was tested with Python 3.12.3. It requires the following Python packages, of which the listed versions were used for all experiments:
