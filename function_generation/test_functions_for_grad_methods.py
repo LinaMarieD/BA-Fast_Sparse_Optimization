@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 """
 Author: Lina Marie Dürrwald
 Date: 15.05.2024
