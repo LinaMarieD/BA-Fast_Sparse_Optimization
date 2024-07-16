@@ -1,4 +1,10 @@
-####### Test functions usable also for gradient methods (with grad calculated using torch.autograd) #####
+
+"""
+Author: Lina Marie Dürrwald
+Date: 15.05.2024
+Description: Script providing the functions that serve as the summands of the created sparse additive functions.
+"""
+
 import torch
 import numpy as np
 from functools import wraps
@@ -6,7 +12,7 @@ from functools import wraps
 def torch_wrapper(func):
     '''
     Handles torch-numpy conversion. If applied to a function of (c_,x_), when calling f = tf1(c_, grad_=True) 
-    it returns the function of x_ that returns tensors, resp. numpy arrays if grad_=False.
+    it returns a function of x_ that returns tensors, resp. numpy arrays if grad_=False.
     '''
     @wraps(func)
     def wrapper(c_, grad_=False):
@@ -25,7 +31,7 @@ def torch_wrapper(func):
     
     return wrapper
 
-# Example of using the decorator with a function
+# Smooth functions
 @torch_wrapper
 def tf1(x_, c_):
     '''
@@ -56,7 +62,6 @@ def tf4(x_, c_):
     Gaussian exp(0.5 * (x-mu).T @ (x-mu))
     '''
     x_ = x_ - c_
-    #x_t = torch.transpose(x_.clone(), 0, 1)
     return torch.exp(0.5 * torch.matmul(x_, x_.T)).reshape(1,)
 
 @torch_wrapper
@@ -75,11 +80,10 @@ def tf6(x_, c_):
     x_ = x_ - c_
     A = torch.repeat_interleave(c_, d).reshape(d, d)
     A = torch.cumsum(A, dim=1, dtype=torch.float64)  # returns a symmetric matrix
-    #Ax = torch.sum(torch.mul(A,x_), axis=1) # A @ x
     return torch.norm(torch.sum(torch.mul(A,x_), axis=1), p=2, dim=0) ** 6
 
 
-@torch_wrapper # TODO: this function used to be non-smooth -> adjust scripts accorsingly??? used to be max!!
+@torch_wrapper 
 def tf7(x_, c_):
     '''
     (x-c).T @ A @ (x-c) for A spd.
@@ -89,7 +93,7 @@ def tf7(x_, c_):
     A = torch.repeat_interleave(c_, d).reshape(d, d)
     A = torch.cumsum(A, dim=1, dtype=torch.float64)  # returns a symmetric matrix
     A = torch.matmul(A, A.T) + 1.1*torch.eye(d) # make positive definite 
-    return x_ @ A @ x_ #torch.matmul(torch.matmul(x_, A), x_.T)# x.TA @ x
+    return x_ @ A @ x_ 
 
 # Non-smooth functions
 @torch_wrapper
@@ -115,11 +119,3 @@ def tf10(x_, c_):
     '''
     x_ = x_ - c_
     return torch.sum(torch.norm(x_[:, 1:] - x_[:, :-1], p=2, dim=1))
-
-# Smooth, only used for BOUNDED methods 
-@torch_wrapper
-def tf11(x_, c_):
-    '''
-    log(sum(exp(x_-c_)))
-    '''
-    return torch.log(torch.sum(torch.exp(x_ - c_), dim=1))
