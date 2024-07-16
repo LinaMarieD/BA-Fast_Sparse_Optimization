@@ -167,7 +167,7 @@ if __name__ == '__main__':
     for i in range(N):
         f_list.append(funcs[sparse_f.f_list[i]])
 
-    # Setup the task queue
+    # Set up the task queue
     task_queue = multiprocessing.JoinableQueue()
     first_times = [True for _ in range(N)]
 
