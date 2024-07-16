@@ -1,12 +1,11 @@
 #!/bin/bash --login
-#SBATCH --job-name=Imaging_CB-ADMM
-#SBATCH --output=/work/duerrwald/Output/out_files/Imaging_CB-ADMM_%j.out
+#SBATCH --job-name=Imaging_BCD
+#SBATCH --output=/work/duerrwald/Output/out_files/Imaging_BCD_%j.out
 #SBATCH --time=24:00:00
-#SBATCH --mem=96G
+#SBATCH --mem=16G
 #SBATCH --nodes=1
 #SBATCH --exclusive
 #SBATCH -C cputype:epyc7302
-#SBATCH --cpus-per-task=32
 #SBATCH --partition=smp
 
 ########## Slurm Job Script for Poisson Denoising with an MRF Prior using CB-ADMM ############
@@ -15,7 +14,7 @@
 # Description: Script for Running the CB-ADMM Algorithm-Part of the CB-ADMM vs BFGS Comparison.
 
 # Example Usage:
-#   sbatch MRF_CB-ADMM.sh -f "160_pepper_noisy.png"
+#   sbatch MRF_BCD.sh -f "160_pepper_noisy.png"
 
 # Arguments:
 #   -f  : Filename of Image to denoise (should be a png file located in ./images)
@@ -35,10 +34,10 @@ while getopts "f:" opt; do
 done
 
 # Initialize variables 
-MAX_ITERs=(200)
-lambdas=(0.05) 
-max_iter_method=4500 # 500 * d
-tol_method=1e-6
+MAX_ITERs=(200) 
+lambdas=(0.05)
+max_iter_method=500 
+tol_method=1e-15
 method="BFGS"
 
 # Iterate over different combinations of Max_Iters and lambdas
@@ -47,7 +46,7 @@ for MAX_ITER in "${MAX_ITERs[@]}"; do
     for lam in "${lambdas[@]}"; do
         echo $MAX_ITER
         echo $lam
-        python3  MRF_CB-ADMM.py --filename="$filename" --method="$method" --MAX_ITER="$MAX_ITER" --max_iter_method="$max_iter_method" --tol_method="$tol_method" --lam="$lam"
+        python3  block_coordinate_descent.py --filename="$filename" --method="$method" --MAX_ITER="$MAX_ITER" --max_iter_method="$max_iter_method" --tol_method="$tol_method" --lam="$lam"
     done
 done
 

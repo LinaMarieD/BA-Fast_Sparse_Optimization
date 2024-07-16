@@ -109,9 +109,9 @@ def worker(task_queue, method, max_iter_method, tol_method, lam, gammas_array, x
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Test Runtimes of CB-ADMM for Poisson Denoising.")
-    parser.add_argument("--filename", default="160_lake_noisy.png", type=str, help="Filename")
+    parser.add_argument("--filename", default="lake_noisy.png", type=str, help="Filename")
     parser.add_argument("--method", type=str, default="BFGS", choices=["BFGS", "L-BFGS-B", "Newton-CG", "CG", "Nelder-Mead"], help="Optimization method")
-    parser.add_argument("--MAX_ITER", type=int, default=2, help="Max. number of iterations of CB") 
+    parser.add_argument("--MAX_ITER", type=int, default=200, help="Max. number of iterations of CB") 
     parser.add_argument("--max_iter_method", type=int, default=4500, help="Max. iterations method") 
     parser.add_argument("--tol_method", type=float, default=1e-6, help="Tolerance of inner ADMM loop (method)")
     parser.add_argument("--lam", type=float, default=0.1, help="Lambda value to multiply with Regularizer")
