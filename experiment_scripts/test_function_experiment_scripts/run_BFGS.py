@@ -33,7 +33,7 @@ output_dir="/work/duerrwald/Output/"
 # Helper functions for saving the output
 def write_to_csv_CB_vs_BB(filename, d, N, init_point_id, method, BB, x_opt_BB, runtime_BB, BB_succ, it, MAX_ITER_d_BB, tolerance, bounded):
     d_str = f"_d={d}"
-    csv_filename = method + d_str + "_maxit=" + str(MAX_ITER_d_BB) + "_CB_vs_BB_BB.csv" 
+    csv_filename = method + d_str + "_maxit=" + str(MAX_ITER_d_BB) + "_BFGS.csv" 
     csv_path = os.path.join(output_dir, csv_filename)
     if not os.path.exists(csv_path):
         with open(csv_path, 'w', newline='') as file:
@@ -46,7 +46,7 @@ def write_to_csv_CB_vs_BB(filename, d, N, init_point_id, method, BB, x_opt_BB, r
 
 def write_to_csv_seq_xbar(filename, d, N, init_point_id, method, times_BB, seq_xbar_BB, MAX_ITER, tolerance, bounded):
     d_str = f"_d={d}"
-    csv_filename = method + d_str + "_maxit=" + str(MAX_ITER) + "_CB_vs_BB_seq_xbar_BB.csv" 
+    csv_filename = method + d_str + "_maxit=" + str(MAX_ITER) + "_seq_xbar_BFGS.csv" 
     csv_path = os.path.join(output_dir, csv_filename)
     if not os.path.exists(csv_path):
         with open(csv_path, 'w', newline='') as file:
@@ -58,7 +58,7 @@ def write_to_csv_seq_xbar(filename, d, N, init_point_id, method, times_BB, seq_x
         writer.writerow([filename, d, N, init_point_id, times_BB, seq_xbar_BB, MAX_ITER,  tolerance,  bounded])
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Test runtimes of the optimization of sparse additive test functions using consensus-based ADMM vs. naive BFGS optimization")
+    parser = argparse.ArgumentParser(description="Test runtimes of the optimization of sparse additive test functions using consensus-based ADMM vs. naive BFGS optimization: Run BFGS.")
     parser.add_argument("--data_dir", default="d=20_N=20_smooth=0", type=str, help="Data directory")
     parser.add_argument("--filename", default="function_d=20_N=20_smooth=0_0.json", type=str, help="Filename")
     parser.add_argument("--method", type=str, default="BFGS", choices=["BFGS", "Newton-CG", "CG", "Nelder-Mead"], help="Optimization method")
