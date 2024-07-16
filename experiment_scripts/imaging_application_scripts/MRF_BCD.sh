@@ -1,6 +1,6 @@
 #!/bin/bash --login
 #SBATCH --job-name=Imaging_BCD
-#SBATCH --output=/work/duerrwald/Output/out_files/Imaging_BCD_%j.out
+#SBATCH --output=Imaging_BCD_%j.out
 #SBATCH --time=24:00:00
 #SBATCH --mem=16G
 #SBATCH --nodes=1
@@ -9,15 +9,16 @@
 #SBATCH --partition=smp
 
 ########## Slurm Job Script for Poisson Denoising with an MRF Prior using CB-ADMM ############
+#
 # Author: Lina Marie Dürrwald
 # Date: 09.06.2024
 # Description: Script for Running the CB-ADMM Algorithm-Part of the CB-ADMM vs BFGS Comparison.
 
 # Example Usage:
-#   sbatch MRF_BCD.sh -f "160_pepper_noisy.png"
+#   sbatch MRF_BCD.sh -f "pepper_noisy.png"
 
 # Arguments:
-#   -f  : Filename of Image to denoise (should be a png file located in ./images)
+#   -f  : Filename of Image to denoise (should be a .png file located in ./images)
 
 # Requirements:
 #   - Ensure that any necessary modules are loaded before running the script by activating a suitable conda environment and replacing the respective line below.
@@ -40,7 +41,7 @@ max_iter_method=500
 tol_method=1e-15
 method="BFGS"
 
-# Iterate over different combinations of Max_Iters and lambdas
+# Iterate over different combinations of MAX_ITERs and lambdas
 echo $filename
 for MAX_ITER in "${MAX_ITERs[@]}"; do
     for lam in "${lambdas[@]}"; do

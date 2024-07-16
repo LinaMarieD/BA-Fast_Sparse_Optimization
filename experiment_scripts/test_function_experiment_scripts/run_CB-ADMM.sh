@@ -1,6 +1,6 @@
 #!/bin/bash --login
 #SBATCH --job-name=CB-ADMM
-#SBATCH --output=/work/duerrwald/Output/out_files/CB-ADMM_%j.out
+#SBATCH --output=CB-ADMM_%j.out
 #SBATCH --time=1-00:00:00
 #SBATCH --exclusive
 #SBATCH -C cputype:epyc7313
@@ -10,6 +10,7 @@
 #SBATCH --partition=smp
 
 ########## Slurm Job Script for Running the CB-ADMM Algorithm ############
+#
 # Author: Lina Marie Dürrwald
 # Date: 09.06.2024
 # Description: Script for Running the CB-ADMM Algorithm-Part of the CB-ADMM vs BFGS Comparison.

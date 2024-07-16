@@ -1,6 +1,6 @@
 #!/bin/bash --login
 #SBATCH --job-name=Naive-BFGS
-#SBATCH --output=/work/duerrwald/Output/out_files/Naive-BFGS_%j.out
+#SBATCH --output=Naive-BFGS_%j.out
 #SBATCH --time=10:00:00
 #SBATCH --exclusive
 #SBATCH -C cputype:epyc7313
@@ -9,6 +9,7 @@
 #SBATCH --partition=smp
 
 ########## Slurm Job Script for Running the Naive BFGS Algorithm ############
+#
 # Author: Lina Marie Dürrwald
 # Date: 09.06.2024
 # Description: Script for Running the Naive BFGS Algorithm-Part of the CB-ADMM vs BFGS Comparison. This script runs the BFGS, or an alternative 
