@@ -16,7 +16,7 @@ The code was tested with Python 3.12.3. It requires the following Python package
   - `utils/`: Contains a script providing helpful functions used in different experiments.
 
 - `function_generation/`: Contains the scripts for creating sparse additive functions and the set of test functions used in the thesis.
-  - `SparseFunctions/`: Pre-generated sparse function data of smooth and non-smooth sparse additive functions that were used in the numerical experiments.
+  - `SparseFunctions/`: Test set of smooth and non-smooth sparse additive functions that were used in the numerical experiments.
 
 - `images/`: Contains the images used in the imaging experiments.
 
