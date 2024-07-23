@@ -13,7 +13,7 @@
 #
 # Author: Lina Marie Dürrwald
 # Date: 09.06.2024
-# Description: Script for Running the CB-ADMM Algorithm-Part of the CB-ADMM vs BFGS Comparison.
+# Description: Script for Running the CB-ADMM Algorithm-Part of the CB-ADMM vs BCD Comparison.
 
 # Example Usage:
 #   sbatch MRF_CB-ADMM.sh -f "pepper_noisy.png"
