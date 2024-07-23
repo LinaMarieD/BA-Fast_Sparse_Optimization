@@ -8,11 +8,11 @@
 #SBATCH -C cputype:epyc7302
 #SBATCH --partition=smp
 
-########## Slurm Job Script for Poisson Denoising with an MRF Prior using CB-ADMM ############
+########## Slurm Job Script for Poisson Denoising with an MRF Prior using Block Coordinate Descent ############
 #
 # Author: Lina Marie Dürrwald
 # Date: 09.06.2024
-# Description: Script for Running the CB-ADMM Algorithm-Part of the CB-ADMM vs BFGS Comparison.
+# Description: Script for Running the BCD Algorithm-Part of the CB-ADMM vs BCD Comparison.
 
 # Example Usage:
 #   sbatch MRF_BCD.sh -f "pepper_noisy.png"
